@@ -1,3 +1,11 @@
+:root {
+  --base-color-blue: #001236;
+  --base-color-yellow: #ffcc01;
+  --base-color-yellow-hover: #ffcc0152;
+  --fg-color: var(--base-color-blue);
+  --fg-color-4: var(--base-color-blue);
+}
+
 * {
   box-sizing: border-box;
 }

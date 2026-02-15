@@ -12,6 +12,14 @@
   --notion-header-height: 54px;
 }
 
+.notion-app, .dark-mode {
+  background: var(--base-color-blue);
+}
+
+.notion-page-link:hover {
+  background: var(--base-color-yellow-hover);
+}
+
 .notion-frame {
   padding: 0;
 }
@@ -388,6 +396,10 @@
   display: none;
 }
 
+.notion-search {
+  
+}
+
 .notion-search .searchBar {
   box-shadow: var(--fg-color-0) 0px 1px 0px;
 }
@@ -402,4 +414,8 @@
 
 .notion-equation.notion-equation-block{
   align-items: center;
+}
+
+.notion-title {
+  text-align: left;
 }
