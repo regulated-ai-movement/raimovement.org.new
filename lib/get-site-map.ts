@@ -1,7 +1,7 @@
 import {
   getAllPagesInSpace,
-  getBlockValue,
   getPageProperty,
+  getPageTitle,
   uuidToId
 } from 'notion-utils'
 import pMemoize from 'p-memoize'
@@ -65,16 +65,26 @@ async function getAllPagesImpl(
         throw new Error(`Error loading page "${pageId}"`)
       }
 
-      const block = getBlockValue(recordMap.block[pageId])
+      const block = recordMap.block[pageId]?.value
       if (
         !(getPageProperty<boolean | null>('Public', block!, recordMap) ?? true)
       ) {
         return map
       }
 
+      const title = getPageTitle(recordMap)
+      if (title && title.toLowerCase().includes('[draft]')) {
+        return map
+      }
+
       const canonicalPageId = getCanonicalPageId(pageId, recordMap, {
         uuid
-      })!
+      })
+
+      // Skip pages with empty or invalid canonical IDs
+      if (!canonicalPageId) {
+        return map
+      }
 
       if (map[canonicalPageId]) {
         // you can have multiple pages in different collections that have the same id
